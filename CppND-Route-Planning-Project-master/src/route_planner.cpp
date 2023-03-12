@@ -23,6 +23,8 @@ RoutePlanner::RoutePlanner(RouteModel &model, float start_x, float start_y, floa
 
 float RoutePlanner::CalculateHValue(RouteModel::Node const *node) {
 
+    return node->distance(*end_node);
+
 }
 
 
@@ -34,10 +36,23 @@ float RoutePlanner::CalculateHValue(RouteModel::Node const *node) {
 // - For each node in current_node.neighbors, add the neighbor to open_list and set the node's visited attribute to true.
 
 void RoutePlanner::AddNeighbors(RouteModel::Node *current_node) {
-
+    current_node->FindNeighbors();
+    int i=0;
+    for(auto neighbor : current_node->neighbors){
+            neighbor->parent=current_node;
+            neighbor->h_value=CalculateHValue(neighbor);
+            neighbor->g_value=current_node->g_value+ current_node->distance(*neighbor);
+            neighbor->visited=true;
+            open_list.push_back(neighbor);
+        i++;
+    }
+        std::cout << "push back to open list "<< i << std::endl;
 }
 
+int CompareSum(RouteModel::Node* first,RouteModel::Node* second){
 
+    return((first->g_value+first->h_value) < (second->g_value+second->h_value));
+}
 // TODO 5: Complete the NextNode method to sort the open list and return the next node.
 // Tips:
 // - Sort the open_list according to the sum of the h value and g value.
@@ -46,7 +61,13 @@ void RoutePlanner::AddNeighbors(RouteModel::Node *current_node) {
 // - Return the pointer.
 
 RouteModel::Node *RoutePlanner::NextNode() {
+ RouteModel::Node * node;   
+ std::sort(open_list.begin(),open_list.end(),CompareSum);
+ node = open_list.back();
+    //std::cout << "openlist size =   " << open_list.size()<< std::endl;
+ open_list.pop_back();
 
+ return node;
 }
 
 
@@ -62,8 +83,20 @@ std::vector<RouteModel::Node> RoutePlanner::ConstructFinalPath(RouteModel::Node 
     // Create path_found vector
     distance = 0.0f;
     std::vector<RouteModel::Node> path_found;
-
+    RouteModel::Node * node_path=current_node;
+    
     // TODO: Implement your solution here.
+    while(1){
+
+        path_found.insert(path_found.begin(),*node_path);
+        if(node_path->parent!=nullptr){
+            distance=distance+node_path->distance(*node_path->parent);
+            node_path=node_path->parent;
+        }
+        else
+            break;
+    }
+
 
     distance *= m_Model.MetricScale(); // Multiply the distance by the scale of the map to get meters.
     return path_found;
@@ -80,7 +113,29 @@ std::vector<RouteModel::Node> RoutePlanner::ConstructFinalPath(RouteModel::Node 
 
 void RoutePlanner::AStarSearch() {
     RouteModel::Node *current_node = nullptr;
-
+    start_node->parent=nullptr;
+    current_node=start_node;
+   // RouteModel::Node * node;
     // TODO: Implement your solution here.
-
+     //   AddNeighbors(current_node);
+     int i =1000;
+    do
+    //while (current_node->x!=end_node->x && current_node->y!=end_node->y);
+    {
+        AddNeighbors(current_node);
+    std::cout << "start openlist size =   " << open_list.size() << "  parent ptr = " << current_node<< std::endl;
+    if (current_node->x!=end_node->x && current_node->y!=end_node->y){
+        current_node=NextNode();
+    }
+    else
+        {
+            break;        
+        }
+    std::cout << "stop openlist size =   " << open_list.size() << "   parent ptr = " << current_node<< std::endl;
+    }
+    while (open_list.size() > 0);
+    //while (current_node->x!=end_node->x && current_node->y!=end_node->y);
+    //while (i-- != 0);
+ 
+   m_Model.path=ConstructFinalPath(current_node);
 }
