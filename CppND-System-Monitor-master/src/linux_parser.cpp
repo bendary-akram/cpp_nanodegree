@@ -3,12 +3,11 @@
 #include <dirent.h>
 #include <unistd.h>
 
+#include <exception>
 #include <iostream>
 #include <sstream>
 #include <string>
 #include <vector>
-//#include <linux/jiffies.h>
-#include <exception>
 
 using std::ifstream;
 using std::istringstream;
@@ -121,7 +120,6 @@ long LinuxParser::UpTime() {
   }
 }
 
-// TODO: Read and return the number of jiffies for the system
 long LinuxParser::Jiffies() {
   ifstream file_stream(kProcDirectory + kStatFilename);
   string key;
@@ -144,8 +142,6 @@ long LinuxParser::Jiffies() {
   }
 }
 
-// TODO: Read and return the number of active jiffies for a PID
-// REMOVE: [[maybe_unused]] once you define the function
 long LinuxParser::ActiveJiffies(int pid) {
   ifstream file_stream(kProcDirectory + to_string(pid) + kStatFilename);
   string key;
@@ -163,7 +159,6 @@ long LinuxParser::ActiveJiffies(int pid) {
       if (key == "cpu") break;
     }
   }
-  // std::cout << "Active Jiffies pid " << value << std::endl;
   try {
     return (stoi(user) + stoi(nice) + stoi(system));
   } catch (std::exception& e) {
@@ -171,7 +166,6 @@ long LinuxParser::ActiveJiffies(int pid) {
   }
 }
 
-// TODO: Read and return the number of active jiffies for the system
 long LinuxParser::ActiveJiffies() {
   ifstream file_stream(kProcDirectory + kStatFilename);
   string key;
@@ -189,7 +183,6 @@ long LinuxParser::ActiveJiffies() {
       if (key == "cpu") break;
     }
   }
-  // std::cout << "Active Jiffies" << value << std::endl;
   try {
     return (stoi(user) + stoi(nice) + stoi(system));
   } catch (std::exception& e) {
@@ -197,7 +190,6 @@ long LinuxParser::ActiveJiffies() {
   }
 }
 
-// TODO: Read and return the number of idle jiffies for the system
 long LinuxParser::IdleJiffies() {
   ifstream file_stream(kProcDirectory + kStatFilename);
   string key;
@@ -215,7 +207,6 @@ long LinuxParser::IdleJiffies() {
       if (key == "cpu") break;
     }
   }
-  // std::cout << "Idle Jiffies" << value << std::endl;
   try {
     return (stoi(value));
   } catch (std::exception& e) {
@@ -223,7 +214,6 @@ long LinuxParser::IdleJiffies() {
   }
 }
 
-// TODO: Read and return CPU utilization
 vector<string> LinuxParser::CpuUtilization() {
   string line{"1"};
   string utime{"1"};
@@ -259,7 +249,7 @@ vector<string> LinuxParser::CpuUtilization() {
         }
         total_time = stol(cutime) + stol(cstime) + stol(stime) + stol(utime);
         seconds = abs(uptime - (stol(starttime) / herz));
-        if (seconds <= 0) seconds =1;
+        if (seconds <= 0) seconds = 1;
         cpu_usage = 100 * ((total_time / herz) / seconds);
       }
       result.emplace_back(to_string(cpu_usage));
@@ -327,7 +317,6 @@ string LinuxParser::Command(int pid) {
 
   else {
   }
-  // std::cout << "Cmd is " << line_str << std::endl;
 
   return line_str;
 }
@@ -453,7 +442,7 @@ float LinuxParser::CpuUtilization(int pid) {
       }
       total_time = stol(cutime) + stol(cstime) + stol(stime) + stol(utime);
       seconds = abs(uptime - (stol(starttime) / herz));
-      if (seconds <= 0) seconds =1;
+      if (seconds <= 0) seconds = 1;
       cpu_usage = 100 * ((total_time / herz) / seconds);
     }
   } catch (std::exception& e) {

@@ -29,7 +29,6 @@ Processor& System::Cpu() {
   return cpu_;
 }
 
-// TODO: Return a container composed of the system's processes
 vector<Process>& System::Processes() {
   vector<int> pids = LinuxParser::Pids();
 
@@ -39,7 +38,6 @@ vector<Process>& System::Processes() {
                     LinuxParser::UpTime(pids[i]));
     processes_.emplace_back(process);
   }
-  //    std::cout << " process size " << processes_.size() << std::endl;
   sort(processes_.begin(), processes_.end());
 
   return processes_;

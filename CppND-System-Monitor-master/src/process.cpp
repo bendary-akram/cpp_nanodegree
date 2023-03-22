@@ -18,7 +18,6 @@ Process::Process(int pid, string user, string cmd, string ram, long int uptime)
     : pid_(pid), user_(user), command_(cmd), ram_(ram), uptime_(uptime) {}
 int Process::Pid() { return pid_; }
 
-// TODO: Return this process's CPU utilization
 float Process::CpuUtilization() {
   cpu_usage_ = LinuxParser::CpuUtilization(pid_);
   return cpu_usage_;
@@ -32,7 +31,6 @@ string Process::User() { return user_; }
 
 long int Process::UpTime() { return uptime_; }
 
-// TODO: Overload the "less than" comparison operator for Process objects
 bool Process::operator<(Process const& a) const {
   bool result;
   try {

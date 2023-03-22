@@ -16,5 +16,5 @@ float Processor::Utilization() {
     total_cpu_usage = 1.1;
   }
 
-  return total_cpu_usage;
+  return (total_cpu_usage / cpu_usage.size());
 }
