@@ -134,7 +134,6 @@ long LinuxParser::Jiffies() {
       if (key == "cpu") break;
     }
   }
-  // std::cout << "Jiffies" << value << std::endl;
   try {
     return (stoi(value));
   } catch (std::exception& e) {
@@ -147,22 +146,31 @@ long LinuxParser::ActiveJiffies(int pid) {
   string key;
   string value;
   string line_str;
-  string user;
-  string nice;
-  string system;
+  string utime;
+  string stime;
+  string cutime;
+  string cstime;
+  int i = 0;
+  long total_time;
+  string temp;
+
   if (file_stream.is_open()) {
-    while (getline(file_stream, line_str)) {
-      istringstream line_stream(line_str);
-      while (line_stream >> key >> user >> nice >> system >> value) {
-        if (key == "cpu") break;
-      }
-      if (key == "cpu") break;
+    getline(file_stream, line_str);
+    istringstream linestream(line_str);
+
+    while (i < starttime_index) {
+      if (i == utime_index - 1)
+        linestream >> utime >> stime >> cutime >> cstime;
+      else
+        linestream >> temp;
+      i++;
     }
   }
   try {
-    return (stoi(user) + stoi(nice) + stoi(system));
+    total_time = stol(cutime) + stol(cstime) + stol(stime) + stol(utime);
+    return (total_time / sysconf(_SC_CLK_TCK));
   } catch (std::exception& e) {
-    return (1);
+    return (1.1);
   }
 }
 
@@ -390,6 +398,7 @@ long LinuxParser::UpTime(int pid) {
   ifstream file_stream(kProcDirectory + to_string(pid) + kStatFilename);
   string line;
   string uptime;
+  long sys_uptime = LinuxParser::UpTime();
   int i = 0;
 
   if (file_stream.is_open()) {
@@ -403,7 +412,7 @@ long LinuxParser::UpTime(int pid) {
   }
 
   try {
-    return (stol(uptime) / sysconf(_SC_CLK_TCK));
+    return sys_uptime - (stol(uptime) / sysconf(_SC_CLK_TCK));
   }
 
   catch (std::exception& e) {

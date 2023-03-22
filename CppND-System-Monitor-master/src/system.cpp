@@ -31,6 +31,7 @@ Processor& System::Cpu() {
 
 vector<Process>& System::Processes() {
   vector<int> pids = LinuxParser::Pids();
+  processes_.clear();
 
   for (int i = 0; i < pids.size(); i++) {
     Process process(pids[i], LinuxParser::User(pids[i]),

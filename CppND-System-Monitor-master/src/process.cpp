@@ -19,7 +19,10 @@ Process::Process(int pid, string user, string cmd, string ram, long int uptime)
 int Process::Pid() { return pid_; }
 
 float Process::CpuUtilization() {
-  cpu_usage_ = LinuxParser::CpuUtilization(pid_);
+  long seconds = LinuxParser::UpTime(pid_);
+  long totaltime = LinuxParser::ActiveJiffies(pid_);
+  // cpu_usage_ = LinuxParser::CpuUtilization(pid_);
+  cpu_usage_ = float(totaltime) / float(seconds);
   return cpu_usage_;
 }
 
