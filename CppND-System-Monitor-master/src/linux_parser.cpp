@@ -236,7 +236,7 @@ vector<string> LinuxParser::CpuUtilization() {
   long seconds = 0;
   long herz = sysconf(_SC_CLK_TCK);
   vector<int> pids = LinuxParser::Pids();
-  float cpu_usage = 0;
+  long cpu_usage = 0;
   std::vector<string> result;
   try {
     for (int pid : pids) {
