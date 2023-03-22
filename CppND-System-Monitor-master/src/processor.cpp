@@ -7,8 +7,14 @@ float Processor::Utilization() {
   std::vector<std::string> cpu_usage = LinuxParser::CpuUtilization();
   float total_cpu_usage = 0;
 
-  for (std::string x : cpu_usage) {
+  try {
+    for (std::string x : cpu_usage) {
     total_cpu_usage = total_cpu_usage + stof(x);
   }
-  return total_cpu_usage;
+
+  } catch (std::exception& e) {
+    total_cpu_usage=1.1;
+  }
+
+    return total_cpu_usage;
 }

@@ -22,16 +22,7 @@ int Process::Pid() { return pid_; }
 float Process::CpuUtilization() {
   cpu_usage_ = LinuxParser::CpuUtilization(pid_);
   return cpu_usage_;
-  /* 
-  vector<string> cpu_usage = LinuxParser::CpuUtilization();
-  float total_cpu_usage=0;
-  for(string i : cpu_usage)
-  {
-    total_cpu_usage = total_cpu_usage + stof(i);
-  }
-  
-  return total_cpu_usage;
-  */ }
+   }
 
   string Process::Command() { return command_; }
 
