@@ -3,22 +3,24 @@
 #include <unistd.h>
 
 #include <cctype>
+#include <iostream>
 #include <sstream>
 #include <string>
 #include <vector>
-#include <iostream>
+
 #include "linux_parser.h"
 
 using std::string;
 using std::to_string;
 using std::vector;
 
-Process::Process(int pid,string user,string cmd,string ram, long int uptime) : pid_(pid),user_(user),command_(cmd),ram_(ram),uptime_(uptime){}
+Process::Process(int pid, string user, string cmd, string ram, long int uptime)
+    : pid_(pid), user_(user), command_(cmd), ram_(ram), uptime_(uptime) {}
 int Process::Pid() { return pid_; }
 
 // TODO: Return this process's CPU utilization
 float Process::CpuUtilization() {
-  cpu_usage_= LinuxParser::CpuUtilization(pid_);
+  cpu_usage_ = LinuxParser::CpuUtilization(pid_);
   return cpu_usage_;
   /* 
   vector<string> cpu_usage = LinuxParser::CpuUtilization();
@@ -31,25 +33,24 @@ float Process::CpuUtilization() {
   return total_cpu_usage;
   */ }
 
-string Process::Command() { return command_; }
+  string Process::Command() { return command_; }
 
-string Process::Ram() { return ram_; }
+  string Process::Ram() { return ram_; }
 
-string Process::User() { return user_; }
+  string Process::User() { return user_; }
 
-long int Process::UpTime() { return uptime_; }
+  long int Process::UpTime() { return uptime_; }
 
-// TODO: Overload the "less than" comparison operator for Process objects
-bool Process::operator<(Process const& a ) const{
-  bool result;
-  try{
-    result = (a.cpu_usage_  < cpu_usage_);
+  // TODO: Overload the "less than" comparison operator for Process objects
+  bool Process::operator<(Process const& a) const {
+    bool result;
+    try {
+      result = (a.cpu_usage_ < cpu_usage_);
+    }
+
+    catch (std::exception& e) {
+      std::cout << "Standard exception: " << e.what() << std::endl;
+    }
+
+    return (result);
   }
-
-  catch (std::exception& e)
-  {
-    std::cout << "Standard exception: " << e.what() << std::endl;
-  }
-
-  return ( result );
-}

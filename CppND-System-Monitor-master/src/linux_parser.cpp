@@ -17,7 +17,6 @@ using std::string;
 using std::to_string;
 using std::vector;
 
-
 #define utime_index (14)
 #define stime_index (15)
 #define cutime_index (16)
@@ -102,7 +101,7 @@ float LinuxParser::MemoryUtilization() {
   }
   memoryValue = (MTotal - MFree) / float(MTotal);
   return memoryValue;
-   }
+}
 
 long LinuxParser::UpTime() {
   ifstream file_stream(kProcDirectory + kUptimeFilename);
@@ -113,12 +112,11 @@ long LinuxParser::UpTime() {
     std::istringstream linestream(line);
     linestream >> uptime;
   }
-try{
-  return (stol(uptime));
-}
-   
-   catch (std::exception& e)
-  {
+  try {
+    return (stol(uptime));
+  }
+
+  catch (std::exception& e) {
     return (std::stol("1"));
   }
 }
@@ -138,15 +136,12 @@ long LinuxParser::Jiffies() {
       if (key == "cpu") break;
     }
   }
-  //std::cout << "Jiffies" << value << std::endl;
-  try{
-  return (stoi(value));
-  }
-     catch (std::exception& e)
-  {
+  // std::cout << "Jiffies" << value << std::endl;
+  try {
+    return (stoi(value));
+  } catch (std::exception& e) {
     return (1);
   }
-
 }
 
 // TODO: Read and return the number of active jiffies for a PID
@@ -168,12 +163,10 @@ long LinuxParser::ActiveJiffies(int pid) {
       if (key == "cpu") break;
     }
   }
-  //std::cout << "Active Jiffies pid " << value << std::endl;
-  try{
-  return (stoi(user) + stoi(nice) + stoi(system));
-  }
-     catch (std::exception& e)
-  {
+  // std::cout << "Active Jiffies pid " << value << std::endl;
+  try {
+    return (stoi(user) + stoi(nice) + stoi(system));
+  } catch (std::exception& e) {
     return (1);
   }
 }
@@ -196,12 +189,10 @@ long LinuxParser::ActiveJiffies() {
       if (key == "cpu") break;
     }
   }
-  //std::cout << "Active Jiffies" << value << std::endl;
-  try{
-  return (stoi(user) + stoi(nice) + stoi(system));
-  }
-     catch (std::exception& e)
-  {
+  // std::cout << "Active Jiffies" << value << std::endl;
+  try {
+    return (stoi(user) + stoi(nice) + stoi(system));
+  } catch (std::exception& e) {
     return (1);
   }
 }
@@ -224,12 +215,10 @@ long LinuxParser::IdleJiffies() {
       if (key == "cpu") break;
     }
   }
-  //std::cout << "Idle Jiffies" << value << std::endl;
-  try{
-  return (stoi(value)); 
-  }
-    catch (std::exception& e)
-  {
+  // std::cout << "Idle Jiffies" << value << std::endl;
+  try {
+    return (stoi(value));
+  } catch (std::exception& e) {
     return (1);
   }
 }
@@ -248,24 +237,22 @@ vector<string> LinuxParser::CpuUtilization() {
   long herz = sysconf(_SC_CLK_TCK);
   vector<int> pids = LinuxParser::Pids();
   float cpu_usage = 0;
-    std::vector<string> result;
-try{
-  for (int pid : pids) {
-    ifstream file_stream(kProcDirectory + to_string(pid) + kStatFilename);
-    long uptime = LinuxParser::UpTime(pid)* sysconf(_SC_CLK_TCK);
-    int i = 0;
-    if (file_stream.is_open()) {
-      
+  std::vector<string> result;
+  try {
+    for (int pid : pids) {
+      ifstream file_stream(kProcDirectory + to_string(pid) + kStatFilename);
+      long uptime = LinuxParser::UpTime(pid) ;
+      int i = 0;
+      if (file_stream.is_open()) {
         getline(file_stream, line);
         std::istringstream linestream(line);
 
         while (i < starttime_index) {
-          
-          if (i == utime_index -1)
+          if (i == utime_index - 1)
             linestream >> utime >> stime >> cutime >> cstime;
-          else if (i == starttime_index -4)
+          else if (i == starttime_index - 4)
             linestream >> starttime;
-            else
+          else
             linestream >> temp;
 
           i++;
@@ -273,12 +260,10 @@ try{
         total_time = stol(cutime) + stol(cstime) + stol(stime) + stol(utime);
         seconds = uptime - (stol(starttime) / herz);
         cpu_usage = 100 * ((total_time / herz) / seconds);
+      }
+      result.emplace_back(to_string(cpu_usage));
     }
-    result.emplace_back(to_string(cpu_usage));
-  }
-}
-  catch (std::exception& e)
-  {
+  } catch (std::exception& e) {
     std::cout << "Standard exception: " << e.what() << std::endl;
   }
   return result;
@@ -300,14 +285,11 @@ int LinuxParser::TotalProcesses() {
       if (key == "processes") break;
     }
   }
-  try{
-  return (stoi(value));
-  }
-     catch (std::exception& e)
-  {
+  try {
+    return (stoi(value));
+  } catch (std::exception& e) {
     return (1);
   }
-
 }
 
 int LinuxParser::RunningProcesses() {
@@ -327,14 +309,11 @@ int LinuxParser::RunningProcesses() {
 
   } else {
   }
-try{
-  return (stoi(value));
-}
-   catch (std::exception& e)
-  {
+  try {
+    return (stoi(value));
+  } catch (std::exception& e) {
     return (1);
   }
-
 }
 
 string LinuxParser::Command(int pid) {
@@ -347,7 +326,7 @@ string LinuxParser::Command(int pid) {
 
   else {
   }
-  //std::cout << "Cmd is " << line_str << std::endl;
+  // std::cout << "Cmd is " << line_str << std::endl;
 
   return line_str;
 }
@@ -367,14 +346,11 @@ string LinuxParser::Ram(int pid) {
 
   } else {
   }
-try{
-  return to_string(stoi(value)/1024);
-}
-     catch (std::exception& e)
-  {
+  try {
+    return to_string(stoi(value) / 1024);
+  } catch (std::exception& e) {
     return ("1");
   }
-
 }
 
 string LinuxParser::Uid(int pid) {
@@ -425,27 +401,25 @@ long LinuxParser::UpTime(int pid) {
   string line;
   string uptime;
   int i = 0;
-  
+
   if (file_stream.is_open()) {
     {
       getline(file_stream, line);
       std::istringstream linestream(line);
-      while (i++ < starttime_index ) {
+      while (i++ < starttime_index) {
         linestream >> uptime;
-     } 
-     /*if(pid == 34677)
-        std::cout << "pid " << i << "uptime " << uptime << std::endl;
-        */
-      
+      }
+      /*if(pid == 34677)
+         std::cout << "pid " << i << "uptime " << uptime << std::endl;
+         */
     }
   }
-    
-try{
-  return (stol(uptime) / sysconf(_SC_CLK_TCK) );
-}
- 
-  catch (std::exception& e)
-  {
+
+  try {
+    return (stol(uptime) / sysconf(_SC_CLK_TCK));
+  }
+
+  catch (std::exception& e) {
     return (std::stol("1"));
   }
 }
@@ -461,36 +435,30 @@ float LinuxParser::CpuUtilization(int pid) {
   long seconds = 0;
   long herz = sysconf(_SC_CLK_TCK);
   float cpu_usage = 0;
-try{
+  try {
     ifstream file_stream(kProcDirectory + to_string(pid) + kStatFilename);
     long uptime = LinuxParser::UpTime(pid);
     int i = 0;
     if (file_stream.is_open()) {
-      
-        getline(file_stream, line);
-        std::istringstream linestream(line);
+      getline(file_stream, line);
+      std::istringstream linestream(line);
 
-        while (i <= starttime_index) {
-          
-          if (i == utime_index-1)
-            linestream >> utime >> stime >> cutime >> cstime;
-          else if (i == starttime_index-4)
-            linestream >> starttime;
-            else
-            linestream >> temp;
+      while (i <= starttime_index) {
+        if (i == utime_index - 1)
+          linestream >> utime >> stime >> cutime >> cstime;
+        else if (i == starttime_index - 4)
+          linestream >> starttime;
+        else
+          linestream >> temp;
 
-          i++;
-        }
-        total_time = stol(cutime) + stol(cstime) + stol(stime) + stol(utime);
-        seconds = abs(uptime - (stol(starttime) / herz));
-        cpu_usage = 100 * ((total_time / herz) / seconds);
+        i++;
+      }
+      total_time = stol(cutime) + stol(cstime) + stol(stime) + stol(utime);
+      seconds = abs(uptime - (stol(starttime) / herz));
+      cpu_usage = 100 * ((total_time / herz) / seconds);
     }
-//    std::cout << "pid " << pid << "cpu usage " << seconds << std::endl;
-}
-  catch (std::exception& e)
-  {
+  } catch (std::exception& e) {
     std::cout << "Standard exception: " << e.what() << std::endl;
   }
   return cpu_usage;
 }
-

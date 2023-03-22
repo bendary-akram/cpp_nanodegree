@@ -3,6 +3,7 @@
 #include <unistd.h>
 
 #include <cstddef>
+#include <iostream>
 #include <set>
 #include <string>
 #include <vector>
@@ -10,7 +11,6 @@
 #include "linux_parser.h"
 #include "process.h"
 #include "processor.h"
-#include <iostream>
 
 using std::set;
 using std::size_t;
@@ -23,29 +23,27 @@ system."
 You need to properly format the uptime. Refer to the comments mentioned in
 format. cpp for formatting the uptime.*/
 
-Processor& System::Cpu() { 
-    Processor pro;
-    cpu_=pro;
-    return cpu_; 
-    }
+Processor& System::Cpu() {
+  Processor pro;
+  cpu_ = pro;
+  return cpu_;
+}
 
 // TODO: Return a container composed of the system's processes
-vector<Process>& System::Processes() { 
-    vector<int> pids=LinuxParser::Pids();
+vector<Process>& System::Processes() {
+  vector<int> pids = LinuxParser::Pids();
 
-    for(int i=0; i < pids.size();i++){
-                Process process(pids[i], 
-                LinuxParser::User(pids[i]),
-                LinuxParser::Command(pids[i]),
-                LinuxParser::Ram(pids[i]), 
-                LinuxParser::UpTime(pids[i])
-                );
-        processes_.emplace_back(process);
-    }
-//    std::cout << " process size " << processes_.size() << std::endl;
-    sort(processes_.begin(),processes_.end());
+  for (int i = 0; i < pids.size(); i++) {
+    Process process(pids[i], LinuxParser::User(pids[i]),
+                    LinuxParser::Command(pids[i]), LinuxParser::Ram(pids[i]),
+                    LinuxParser::UpTime(pids[i]));
+    processes_.emplace_back(process);
+  }
+  //    std::cout << " process size " << processes_.size() << std::endl;
+  sort(processes_.begin(), processes_.end());
 
-    return processes_; }
+  return processes_;
+}
 
 std::string System::Kernel() { return LinuxParser::Kernel(); }
 
