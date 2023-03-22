@@ -258,7 +258,8 @@ vector<string> LinuxParser::CpuUtilization() {
           i++;
         }
         total_time = stol(cutime) + stol(cstime) + stol(stime) + stol(utime);
-        seconds = uptime - (stol(starttime) / herz);
+        seconds = abs(uptime - (stol(starttime) / herz));
+        if (seconds <= 0) seconds =1;
         cpu_usage = 100 * ((total_time / herz) / seconds);
       }
       result.emplace_back(to_string(cpu_usage));
@@ -409,9 +410,6 @@ long LinuxParser::UpTime(int pid) {
       while (i++ < starttime_index) {
         linestream >> uptime;
       }
-      /*if(pid == 34677)
-         std::cout << "pid " << i << "uptime " << uptime << std::endl;
-         */
     }
   }
 
@@ -455,6 +453,7 @@ float LinuxParser::CpuUtilization(int pid) {
       }
       total_time = stol(cutime) + stol(cstime) + stol(stime) + stol(utime);
       seconds = abs(uptime - (stol(starttime) / herz));
+      if (seconds <= 0) seconds =1;
       cpu_usage = 100 * ((total_time / herz) / seconds);
     }
   } catch (std::exception& e) {
