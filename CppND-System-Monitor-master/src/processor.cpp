@@ -9,12 +9,12 @@ float Processor::Utilization() {
 
   try {
     for (std::string x : cpu_usage) {
-    total_cpu_usage = total_cpu_usage + stof(x);
-  }
+      total_cpu_usage = total_cpu_usage + stof(x);
+    }
 
   } catch (std::exception& e) {
-    total_cpu_usage=1.1;
+    total_cpu_usage = 1.1;
   }
 
-    return total_cpu_usage;
+  return total_cpu_usage;
 }

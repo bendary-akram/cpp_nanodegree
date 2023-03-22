@@ -22,26 +22,26 @@ int Process::Pid() { return pid_; }
 float Process::CpuUtilization() {
   cpu_usage_ = LinuxParser::CpuUtilization(pid_);
   return cpu_usage_;
-   }
+}
 
-  string Process::Command() { return command_; }
+string Process::Command() { return command_; }
 
-  string Process::Ram() { return ram_; }
+string Process::Ram() { return ram_; }
 
-  string Process::User() { return user_; }
+string Process::User() { return user_; }
 
-  long int Process::UpTime() { return uptime_; }
+long int Process::UpTime() { return uptime_; }
 
-  // TODO: Overload the "less than" comparison operator for Process objects
-  bool Process::operator<(Process const& a) const {
-    bool result;
-    try {
-      result = (a.cpu_usage_ < cpu_usage_);
-    }
-
-    catch (std::exception& e) {
-      std::cout << "Standard exception: " << e.what() << std::endl;
-    }
-
-    return (result);
+// TODO: Overload the "less than" comparison operator for Process objects
+bool Process::operator<(Process const& a) const {
+  bool result;
+  try {
+    result = (a.cpu_usage_ < cpu_usage_);
   }
+
+  catch (std::exception& e) {
+    std::cout << "Standard exception: " << e.what() << std::endl;
+  }
+
+  return (result);
+}
