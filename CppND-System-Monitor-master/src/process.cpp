@@ -43,7 +43,7 @@ long int Process::UpTime() { return uptime_; }
 bool Process::operator<(Process const& a ) const{
   bool result;
   try{
-    result = (stol(a.ram_)   < stol(ram_));
+    result = (a.cpu_usage_  < cpu_usage_);
   }
 
   catch (std::exception& e)
