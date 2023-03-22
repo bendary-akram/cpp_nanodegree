@@ -241,7 +241,7 @@ vector<string> LinuxParser::CpuUtilization() {
   try {
     for (int pid : pids) {
       ifstream file_stream(kProcDirectory + to_string(pid) + kStatFilename);
-      long uptime = LinuxParser::UpTime(pid) ;
+      long uptime = LinuxParser::UpTime(pid);
       int i = 0;
       if (file_stream.is_open()) {
         getline(file_stream, line);
