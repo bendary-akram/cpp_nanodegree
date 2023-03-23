@@ -223,45 +223,24 @@ long LinuxParser::IdleJiffies() {
 }
 
 vector<string> LinuxParser::CpuUtilization() {
-  string line{"1"};
-  string utime{"1"};
-  string stime{"1"};
-  string cutime{"1"};
-  string cstime{"1"};
-  string starttime{"1"};
-  string temp{"1"};
-  long total_time = 0;
-  long seconds = 0;
-  long herz = sysconf(_SC_CLK_TCK);
-  vector<int> pids = LinuxParser::Pids();
-  long cpu_usage = 0;
+  string line_str;
+  string value;
   std::vector<string> result;
   try {
-    for (int pid : pids) {
-      ifstream file_stream(kProcDirectory + to_string(pid) + kStatFilename);
-      long uptime = LinuxParser::UpTime(pid);
-      int i = 0;
-      if (file_stream.is_open()) {
-        getline(file_stream, line);
-        std::istringstream linestream(line);
-
-        while (i < starttime_index) {
-          if (i == utime_index - 1)
-            linestream >> utime >> stime >> cutime >> cstime;
-          else if (i == starttime_index - 4)
-            linestream >> starttime;
-          else
-            linestream >> temp;
-
-          i++;
+    ifstream file_stream(kProcDirectory + kStatFilename);
+    if (file_stream.is_open()) {
+      while (getline(file_stream, line_str)) {
+        istringstream line_stream(line_str);
+        line_stream >> value;
+        if (value == "cpu") {
+          while (line_stream >> value) {
+            result.emplace_back(value);
+          }
+          break;
         }
-        total_time = stol(cutime) + stol(cstime) + stol(stime) + stol(utime);
-        seconds = abs(uptime - (stol(starttime) / herz));
-        if (seconds <= 0) seconds = 1;
-        cpu_usage = 100 * ((total_time / herz) / seconds);
       }
-      result.emplace_back(to_string(cpu_usage));
     }
+
   } catch (std::exception& e) {
     std::cout << "Standard exception: " << e.what() << std::endl;
   }
