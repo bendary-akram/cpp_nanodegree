@@ -1,3 +1,0 @@
-/Users/akram/dev/cpp_nanodegree/CppND-Memory-Management-Chatbot-master/build/CMakeFiles/membot.dir
-/Users/akram/dev/cpp_nanodegree/CppND-Memory-Management-Chatbot-master/build/CMakeFiles/edit_cache.dir
-/Users/akram/dev/cpp_nanodegree/CppND-Memory-Management-Chatbot-master/build/CMakeFiles/rebuild_cache.dir
