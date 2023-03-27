@@ -79,12 +79,13 @@ ChatBot::ChatBot(ChatBot &&src){
     _rootNode = src._rootNode;
     _currentNode = src._currentNode;
 
-    delete _image;
+    //delete _image;
     _image = src._image;
 
     src._chatLogic=nullptr;
     src._rootNode=nullptr;
     src._image=nullptr;
+    src._currentNode=nullptr;
 }
 
 // move assigment
@@ -95,13 +96,14 @@ ChatBot &ChatBot::operator=(ChatBot &&src){
     _chatLogic = src._chatLogic;
     _rootNode = src._rootNode;
     _currentNode = src._currentNode;
-    
-    delete _image;
+    //delete _image;
     _image= src._image;
-     src._chatLogic=nullptr;
+
+   _chatLogic->SetChatbotHandle(this); 
+    src._chatLogic=nullptr;
     src._rootNode=nullptr;
     src._image=nullptr;
-
+ src._currentNode=nullptr;
     return *this;
 }
 ////

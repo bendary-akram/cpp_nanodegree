@@ -7,10 +7,10 @@ set(CMAKE_DEPENDS_GENERATOR "Unix Makefiles")
 # The top level Makefile was generated from the following files:
 set(CMAKE_MAKEFILE_DEPENDS
   "CMakeCache.txt"
+  "/Users/akram/dev/cpp_nanodegree/CppND-Memory-Management-Chatbot-master/CMakeLists.txt"
   "CMakeFiles/3.25.3/CMakeCCompiler.cmake"
   "CMakeFiles/3.25.3/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.25.3/CMakeSystem.cmake"
-  "CMakeLists.txt"
   "/opt/homebrew/Cellar/cmake/3.25.3/share/cmake/Modules/CMakeCCompiler.cmake.in"
   "/opt/homebrew/Cellar/cmake/3.25.3/share/cmake/Modules/CMakeCCompilerABI.c"
   "/opt/homebrew/Cellar/cmake/3.25.3/share/cmake/Modules/CMakeCInformation.cmake"
@@ -39,6 +39,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/opt/homebrew/Cellar/cmake/3.25.3/share/cmake/Modules/CMakeTestCCompiler.cmake"
   "/opt/homebrew/Cellar/cmake/3.25.3/share/cmake/Modules/CMakeTestCXXCompiler.cmake"
   "/opt/homebrew/Cellar/cmake/3.25.3/share/cmake/Modules/CMakeTestCompilerCommon.cmake"
+  "/opt/homebrew/Cellar/cmake/3.25.3/share/cmake/Modules/CMakeUnixFindMake.cmake"
   "/opt/homebrew/Cellar/cmake/3.25.3/share/cmake/Modules/Compiler/ADSP-DetermineCompiler.cmake"
   "/opt/homebrew/Cellar/cmake/3.25.3/share/cmake/Modules/Compiler/ARMCC-DetermineCompiler.cmake"
   "/opt/homebrew/Cellar/cmake/3.25.3/share/cmake/Modules/Compiler/ARMClang-DetermineCompiler.cmake"
