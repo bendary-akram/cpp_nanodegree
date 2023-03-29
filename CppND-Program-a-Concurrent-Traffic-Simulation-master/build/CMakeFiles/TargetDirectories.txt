@@ -1,3 +1,0 @@
-/Users/akram/dev/cpp_nanodegree/CppND-Program-a-Concurrent-Traffic-Simulation-master/build/CMakeFiles/traffic_simulation.dir
-/Users/akram/dev/cpp_nanodegree/CppND-Program-a-Concurrent-Traffic-Simulation-master/build/CMakeFiles/edit_cache.dir
-/Users/akram/dev/cpp_nanodegree/CppND-Program-a-Concurrent-Traffic-Simulation-master/build/CMakeFiles/rebuild_cache.dir
