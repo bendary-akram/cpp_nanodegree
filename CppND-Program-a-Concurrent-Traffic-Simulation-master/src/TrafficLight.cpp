@@ -3,7 +3,7 @@
 #include "TrafficLight.h"
 #include <thread>
 #include <chrono>
-
+#include <ctime>
 //using namespace std::literals;
 using namespace std;
 
@@ -79,18 +79,22 @@ void TrafficLight::cycleThroughPhases()
     // to the message queue using move semantics. The cycle duration should be a random value between 4 and 6 seconds. 
     // Also, the while-loop should use std::this_thread::sleep_for to wait 1ms between two cycles.
 
-        const int min_duration=4000;
-        const int max_duration= 6000;
+        const int min_duration=4;
+        const int max_duration= 7;
         int randNum=0;
+        srand(time(NULL));
         std::chrono::high_resolution_clock::time_point start = std::chrono::high_resolution_clock::now();
     while(true){
 
         this_thread::sleep_for(std::chrono::milliseconds(1));
-        randNum = rand()%(max_duration-min_duration) + min_duration;
+        
+        if((randNum< min_duration) || (randNum > max_duration))
+            randNum = (rand()%(max_duration-min_duration)) + min_duration;
+
         const auto end = std::chrono::high_resolution_clock::now();
         const std::chrono::duration<double, std::milli> elapsed = end - start;
 
-        if(elapsed.count() >= randNum)
+        if((((int)elapsed.count())/1000) >= randNum)
         {
             if(_currentPhase == TrafficLightPhase::red)
                 _currentPhase = TrafficLightPhase::green;
@@ -98,7 +102,8 @@ void TrafficLight::cycleThroughPhases()
                 _currentPhase = TrafficLightPhase::red;
 
             _que.send(std::move(_currentPhase));
-         //cout << " count " << elapsed.count() << " rand " << randNum<< endl;
+       //  cout << " count " << (((int)elapsed.count())/1000) << " rand " << randNum<< endl;
+            randNum=0;
             start = std::chrono::high_resolution_clock::now();
         }
 
