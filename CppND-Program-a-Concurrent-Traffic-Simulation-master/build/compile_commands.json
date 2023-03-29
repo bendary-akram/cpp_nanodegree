@@ -1,0 +1,37 @@
+[
+{
+  "directory": "/Users/akram/dev/cpp_nanodegree/CppND-Program-a-Concurrent-Traffic-Simulation-master/build",
+  "command": "/usr/bin/clang++  -isystem /opt/homebrew/Cellar/opencv/4.7.0_2/include/opencv4  -std=c++17 -pthread -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk -std=gnu++11 -o CMakeFiles/traffic_simulation.dir/src/Graphics.cpp.o -c /Users/akram/dev/cpp_nanodegree/CppND-Program-a-Concurrent-Traffic-Simulation-master/src/Graphics.cpp",
+  "file": "/Users/akram/dev/cpp_nanodegree/CppND-Program-a-Concurrent-Traffic-Simulation-master/src/Graphics.cpp"
+},
+{
+  "directory": "/Users/akram/dev/cpp_nanodegree/CppND-Program-a-Concurrent-Traffic-Simulation-master/build",
+  "command": "/usr/bin/clang++  -isystem /opt/homebrew/Cellar/opencv/4.7.0_2/include/opencv4  -std=c++17 -pthread -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk -std=gnu++11 -o CMakeFiles/traffic_simulation.dir/src/Intersection.cpp.o -c /Users/akram/dev/cpp_nanodegree/CppND-Program-a-Concurrent-Traffic-Simulation-master/src/Intersection.cpp",
+  "file": "/Users/akram/dev/cpp_nanodegree/CppND-Program-a-Concurrent-Traffic-Simulation-master/src/Intersection.cpp"
+},
+{
+  "directory": "/Users/akram/dev/cpp_nanodegree/CppND-Program-a-Concurrent-Traffic-Simulation-master/build",
+  "command": "/usr/bin/clang++  -isystem /opt/homebrew/Cellar/opencv/4.7.0_2/include/opencv4  -std=c++17 -pthread -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk -std=gnu++11 -o CMakeFiles/traffic_simulation.dir/src/Street.cpp.o -c /Users/akram/dev/cpp_nanodegree/CppND-Program-a-Concurrent-Traffic-Simulation-master/src/Street.cpp",
+  "file": "/Users/akram/dev/cpp_nanodegree/CppND-Program-a-Concurrent-Traffic-Simulation-master/src/Street.cpp"
+},
+{
+  "directory": "/Users/akram/dev/cpp_nanodegree/CppND-Program-a-Concurrent-Traffic-Simulation-master/build",
+  "command": "/usr/bin/clang++  -isystem /opt/homebrew/Cellar/opencv/4.7.0_2/include/opencv4  -std=c++17 -pthread -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk -std=gnu++11 -o CMakeFiles/traffic_simulation.dir/src/TrafficLight.cpp.o -c /Users/akram/dev/cpp_nanodegree/CppND-Program-a-Concurrent-Traffic-Simulation-master/src/TrafficLight.cpp",
+  "file": "/Users/akram/dev/cpp_nanodegree/CppND-Program-a-Concurrent-Traffic-Simulation-master/src/TrafficLight.cpp"
+},
+{
+  "directory": "/Users/akram/dev/cpp_nanodegree/CppND-Program-a-Concurrent-Traffic-Simulation-master/build",
+  "command": "/usr/bin/clang++  -isystem /opt/homebrew/Cellar/opencv/4.7.0_2/include/opencv4  -std=c++17 -pthread -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk -std=gnu++11 -o CMakeFiles/traffic_simulation.dir/src/TrafficObject.cpp.o -c /Users/akram/dev/cpp_nanodegree/CppND-Program-a-Concurrent-Traffic-Simulation-master/src/TrafficObject.cpp",
+  "file": "/Users/akram/dev/cpp_nanodegree/CppND-Program-a-Concurrent-Traffic-Simulation-master/src/TrafficObject.cpp"
+},
+{
+  "directory": "/Users/akram/dev/cpp_nanodegree/CppND-Program-a-Concurrent-Traffic-Simulation-master/build",
+  "command": "/usr/bin/clang++  -isystem /opt/homebrew/Cellar/opencv/4.7.0_2/include/opencv4  -std=c++17 -pthread -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk -std=gnu++11 -o CMakeFiles/traffic_simulation.dir/src/TrafficSimulator-Final.cpp.o -c /Users/akram/dev/cpp_nanodegree/CppND-Program-a-Concurrent-Traffic-Simulation-master/src/TrafficSimulator-Final.cpp",
+  "file": "/Users/akram/dev/cpp_nanodegree/CppND-Program-a-Concurrent-Traffic-Simulation-master/src/TrafficSimulator-Final.cpp"
+},
+{
+  "directory": "/Users/akram/dev/cpp_nanodegree/CppND-Program-a-Concurrent-Traffic-Simulation-master/build",
+  "command": "/usr/bin/clang++  -isystem /opt/homebrew/Cellar/opencv/4.7.0_2/include/opencv4  -std=c++17 -pthread -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk -std=gnu++11 -o CMakeFiles/traffic_simulation.dir/src/Vehicle.cpp.o -c /Users/akram/dev/cpp_nanodegree/CppND-Program-a-Concurrent-Traffic-Simulation-master/src/Vehicle.cpp",
+  "file": "/Users/akram/dev/cpp_nanodegree/CppND-Program-a-Concurrent-Traffic-Simulation-master/src/Vehicle.cpp"
+}
+]
