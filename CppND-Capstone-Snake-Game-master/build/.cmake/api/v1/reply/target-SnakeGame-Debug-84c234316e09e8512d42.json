@@ -116,6 +116,11 @@
 				"backtrace" : 2,
 				"fragment" : "/opt/homebrew/lib/libSDL2.dylib",
 				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "-lSDL2_ttf",
+				"role" : "libraries"
 			}
 		],
 		"language" : "CXX"
