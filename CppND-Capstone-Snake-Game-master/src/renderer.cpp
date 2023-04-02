@@ -15,7 +15,7 @@ Renderer::Renderer(const std::size_t screen_width,
   if (TTF_Init() < 0) {
     std::cout << "Error initializing SDL_ttf: " << TTF_GetError() << std::endl;
   };
-  font = TTF_OpenFont("/Library/Fonts/Arial.ttf", 24);
+  font = TTF_OpenFont("../src/Arial.ttf", 24);
   if (!font) {
     std::cout << "Failed to load font: " << TTF_GetError() << std::endl;
   }
